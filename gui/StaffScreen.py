@@ -1,5 +1,6 @@
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtWidgets as QtGui
 from Vehicles import *
+from Users import *
 
 
 class StaffScreen(QtGui.QMainWindow):
@@ -295,9 +296,9 @@ class StaffScreen(QtGui.QMainWindow):
                                                 self.model_text_box.text().strip(),
                                                 int(self.fuel_consumption_text_box.text().strip()),
                                                 int(self.number_of_bed_text_box.text().strip(), registration_number,
-                                                    int(self.daily_cost_text_box.text().strip()),
-                                                    int(self.weekly_cost_text_box.text().strip()),
-                                                    int(self.weekend_cost_text_box.text().strip())))
+                                                int(self.daily_cost_text_box.text().strip()),
+                                                int(self.weekly_cost_text_box.text().strip()),
+                                                int(self.weekend_cost_text_box.text().strip())))
                 except ValueError:
                     QtGui.QMessageBox.warning(self, "Warning",
                                               "Vehicle could not created make sure you have correct format of data")

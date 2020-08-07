@@ -1,4 +1,4 @@
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtWidgets as QtGui
 from Users import *
 from gui.CustomerScreen import *
 from gui.StaffScreen import *

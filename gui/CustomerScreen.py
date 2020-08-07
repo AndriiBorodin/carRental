@@ -1,4 +1,4 @@
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtWidgets as QtGui
 from Vehicles import *
 import datetime
 
@@ -80,7 +80,7 @@ class CustomerScreen(QtGui.QMainWindow):
         self.welcome_label.setText("Welcome "+self.customer_user.user_name)
         self.logout_button.setText("Logout")
         self.label_2.setText("Pickup:")
-        self.label_4.setText("Vehicle Tyle:")
+        self.label_4.setText("Vehicle Type:")
 
         self.search_button.setText("Search")
         self.label_3.setText("Drop off:")
@@ -194,10 +194,29 @@ class CustomerScreen(QtGui.QMainWindow):
             temp_vehicle = self.vehicles[registration_number]
             temp_vehicle.rent_from = self.rent_from_date.date().toPyDate()
             temp_vehicle.rent_to = self.rent_to_date.date().toPyDate()
+            Vehicle.rent_from = temp_vehicle.rent_from
             QtGui.QMessageBox.information(self, "Information", "Booking has completed")
 
             self.my_vehicle_list_widget.clear()
             self.my_vehicle_list_widget.addItems(list(self.customer_user.rented_vehicle.keys()))
+
+    def update_date_from(self):
+        registration_number = self.get_update_date_from()
+        if registration_number:
+            Vehicle.rf = 12
+
+            self.my_vehicle_list_widget.clear()
+            self.my_vehicle_list_widget.addItems(list(self.customer_user.rented_vehicle.keys()))
+
+    def get_update_date_from(self):
+            selected_text = self.available_car_list_widget.currentItem().text()
+            '''
+             we use split because we need to separate between car registration number and make-model because we will
+             use registration number as key in dictionary
+            '''
+            selected_registration_number = selected_text.split("Date from")[0]
+            print('registration number:' + selected_registration_number)
+            return selected_registration_number
 
     def get_registration_number_for_rent(self):
         if not self.available_car_list_widget.currentItem():
@@ -217,6 +236,7 @@ class CustomerScreen(QtGui.QMainWindow):
         selected_vehicle = self.vehicles[self.my_vehicle_list_widget.currentItem().text()]
         self.my_vehicle_display_info_widget.clear()
         self.my_vehicle_display_info_widget.setText(selected_vehicle.__str__())
+
     #when user clicks an item from the list this method displays detailed information.
     def display_rental_information(self):
         selected_vehicle = self.vehicles[self.get_registration_number_for_rent()]
