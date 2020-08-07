@@ -23,7 +23,7 @@ class Customer(User):
         temp_vehicle.is_booked = True
         temp_vehicle.rent_from = rent_from
         temp_vehicle.rent_to = rent_to
-        print('booking OK...')
+        print('booking OK..')
 
     '''
     this method will delete vehicle from the customer's dictionary if it is exists
