@@ -1,4 +1,6 @@
 from PyQt5 import QtCore, QtWidgets as QtGui
+from PyQt5.QtWidgets import QCheckBox
+
 from Vehicles import *
 import datetime
 
@@ -42,7 +44,7 @@ class CustomerScreen(QtGui.QMainWindow):
         self.vehicle_type_comboBox.addItems(self.combo_box_items)
         self.gridLayout.addWidget(self.vehicle_type_comboBox, 1, 3, 1, 1)
         self.search_button = QtGui.QPushButton(self.centralwidget)
-        self.gridLayout.addWidget(self.search_button, 2, 3, 1, 1)
+        self.gridLayout.addWidget(self.search_button, 3, 3, 1, 1)
         self.label_3 = QtGui.QLabel(self.centralwidget)
         self.gridLayout.addWidget(self.label_3, 1, 0, 1, 1)
         self.rent_to_date = QtGui.QDateEdit(self.centralwidget)
@@ -74,6 +76,9 @@ class CustomerScreen(QtGui.QMainWindow):
         self.gridLayout_3.addWidget(self.cancel_booking_button, 1, 2, 1, 1)
         self.verticalLayout.addLayout(self.gridLayout_3)
         self.setCentralWidget(self.centralwidget)
+        self.radiobox = QCheckBox('Vip', self)
+        self.gridLayout.addWidget(self.radiobox, 2, 3, 1, 1)
+
 
         self.setWindowTitle("Customer Window")
         #set username to welcome user
@@ -101,6 +106,11 @@ class CustomerScreen(QtGui.QMainWindow):
         self.logout_button.clicked.connect(self.logout_button_action)
         self.available_car_list_widget.itemClicked.connect(self.display_rental_information)
         self.my_vehicle_list_widget.itemClicked.connect(self.display_rented_car_information)
+        self.radiobox.clicked.connect(self.selected_choice_1)
+
+    def selected_choice_1(self, state):
+        if state:
+            print(self.radiobox.text())
 
     '''
      code sample for dialog box  taken from http://zetcode.com/gui/pyqt4/firstprograms/
